@@ -1,7 +1,8 @@
 import Raylib
 
 class Logic {
-    var resourceManager = Resources()
+    var resourcesManager = Resources.manager
+
     // deltaTime singleton --> Outgoing
     static let deltaTime = Raylib.getFrameTime()
 
@@ -13,6 +14,6 @@ class Logic {
     }
 
     func render() {
-        Raylib.drawTexture(resourceManager.loadedResourcesDatabase["map"]!, 0, 0, .white)
+        Raylib.drawTexture(resourcesManager.loadedResourcesDatabase["map"]!, 0, 0, .white)
     }
 }

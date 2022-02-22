@@ -7,7 +7,7 @@ protocol GameObject {
     var movementSpeed: Int16 { get set }
     var sprite: Sprite { get set }
 
-    func update(dt: Float)
+    mutating func update(dt: Float)
 
     func render()
 }
