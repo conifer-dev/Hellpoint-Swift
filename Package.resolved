@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Aeni",
+        "repositoryURL": "https://github.com/conifer-dev/Aeni.git",
+        "state": {
+          "branch": "main",
+          "revision": "34b579afdc7a5b562879e2aa85a7ab1827aac767",
+          "version": null
+        }
+      },
+      {
+        "package": "Raylib",
+        "repositoryURL": "https://github.com/STREGAsGate/Raylib.git",
+        "state": {
+          "branch": "master",
+          "revision": "87da4bfba7a283c83c128186bd5d4b21beb38653",
+          "version": null
+        }
+      },
+      {
+        "package": "Seuwichi",
+        "repositoryURL": "https://github.com/conifer-dev/Seuwichi.git",
+        "state": {
+          "branch": "main",
+          "revision": "7be63f687b19028a6c1e0209be688165d6446531",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
