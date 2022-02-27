@@ -6,7 +6,7 @@ protocol GameObject {
     var movementSpeed: Float { get set }
     var sprite: Sprite { get set }
 
-    mutating func update()
+    mutating func update(deltaTime dt: Float)
 
     mutating func render()
 }

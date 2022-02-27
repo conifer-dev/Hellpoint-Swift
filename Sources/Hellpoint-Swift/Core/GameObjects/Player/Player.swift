@@ -11,16 +11,16 @@ struct Player : GameObject {
     lazy var running: SpriteAnimator = SpriteAnimator(sprite: sprite, origin: Vector2(x: 0, y: 3), rotation: 0, startingFrame: 0, endingFrame: 6, column: 1, duration: 0, animationSpeed: 0.11, repeatable: true, tintColor: .white, debugMode: true)
     lazy var animation = self.idle
 
-    mutating func update() {
+    mutating func update(deltaTime dt: Float) {
         animation.update()
-        self.playerMovement()
+        self.playerMovement(deltaTime: dt)
     }
 
     mutating func render() {
         self.animation.render()
     }
 
-    mutating func playerMovement() {
+    mutating func playerMovement(deltaTime dt: Float) {
         self.velocity.x = 0
         self.velocity.y = 0
 
@@ -41,7 +41,6 @@ struct Player : GameObject {
         }
 
         self.velocity = self.velocity.normalized()
-        self.sprite.position.x += self.velocity.x * self.movementSpeed * Raylib.getFrameTime()
-        print(self.velocity)
+        self.sprite.position.x += self.velocity.x * self.movementSpeed * dt
     }
 }

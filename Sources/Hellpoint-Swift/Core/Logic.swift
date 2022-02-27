@@ -1,16 +1,26 @@
 import Raylib
 import Aeni
+import Seuwichi
 
 class Logic {
-    // Player initialisation
-    lazy var player = Player()
 
-    func update() {
-        player.update()
+    // Player initialisation
+    static var player = Player()
+
+    static var stateManager = StateMachine()
+
+    func initStates() {
+        Logic.stateManager.insertState(IdleState(), withID: "idle")
+        Logic.stateManager.insertState(MoveState(), withID: "move")
+        Logic.stateManager.changeState(id: "idle")
+    }
+
+    func update(deltaTime dt: Float) {
+        Logic.stateManager.update()
     }
 
     func render() {
         Raylib.drawTexture(Resources.manager.loadedResourcesDatabase["map"]!, 0, 0, .white)
-        player.render()
+        Logic.stateManager.render()
     }
 }

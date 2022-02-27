@@ -12,23 +12,27 @@ class Engine {
 	let windowTitle: String = "Hellpoint Swift"
 	let targetFPS: Int32 = 60
 
+	// deltaTime singleton
+	static var deltaTime: Float = 0
+
 	// Engine run startpoint
 	func run() {
 		Raylib.initWindow(windowDimDefines["screenWidth"]!, windowDimDefines["screenHeight"]!, windowTitle)
 		Raylib.setTargetFPS(targetFPS)
-
+		logic.initStates()
 
 		// Main loop
 		while !Raylib.windowShouldClose {
-			self.update()
+			Engine.deltaTime = Raylib.getFrameTime()
+			self.update(deltaTime: Engine.deltaTime)
 			self.render()
 		}
 		Raylib.closeWindow()
 	}
 
 	// Update game logic.
-	private func update() {
-		logic.update()
+	private func update(deltaTime dt: Float) {
+		logic.update(deltaTime: dt)
 	}
 
 	// Render the game
@@ -39,5 +43,5 @@ class Engine {
 		Raylib.endDrawing()
 	}
 
-	private init() { }
+	private init() {	}
 }
