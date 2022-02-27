@@ -17,6 +17,7 @@ class Engine {
 		Raylib.initWindow(windowDimDefines["screenWidth"]!, windowDimDefines["screenHeight"]!, windowTitle)
 		Raylib.setTargetFPS(targetFPS)
 
+
 		// Main loop
 		while !Raylib.windowShouldClose {
 			self.update()

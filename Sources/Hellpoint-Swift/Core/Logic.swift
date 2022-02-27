@@ -1,19 +1,16 @@
 import Raylib
+import Aeni
 
 class Logic {
-    var resourcesManager = Resources.manager
-
-    // deltaTime singleton --> Outgoing
-    static let deltaTime = Raylib.getFrameTime()
-
     // Player initialisation
-    // TODO:
+    lazy var player = Player()
 
     func update() {
-
+        player.update()
     }
 
     func render() {
-        Raylib.drawTexture(resourcesManager.loadedResourcesDatabase["map"]!, 0, 0, .white)
+        Raylib.drawTexture(Resources.manager.loadedResourcesDatabase["map"]!, 0, 0, .white)
+        player.render()
     }
 }
