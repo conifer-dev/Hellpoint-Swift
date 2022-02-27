@@ -12,7 +12,7 @@ struct Player : GameObject {
     lazy var animation = self.idle
 
     mutating func update(deltaTime dt: Float) {
-        animation.update()
+        animation.update(deltaTime: dt)
         self.playerMovement(deltaTime: dt)
     }
 
@@ -34,13 +34,18 @@ struct Player : GameObject {
             self.animation.flipSprite(horizontal: true, vertical: false)
         }
 
-        if self.velocity.x == 0 {
-            self.animation = self.idle
-        } else {
-            self.animation = self.running
+        if Raylib.isKeyDown(.letterW) {
+            self.velocity.y -= 1
         }
+
+        if Raylib.isKeyDown(.letterS) {
+            self.velocity.y += 1
+        }
+
+        print(self.velocity)
 
         self.velocity = self.velocity.normalized()
         self.sprite.position.x += self.velocity.x * self.movementSpeed * dt
+        self.sprite.position.y += self.velocity.y * self.movementSpeed * dt
     }
 }

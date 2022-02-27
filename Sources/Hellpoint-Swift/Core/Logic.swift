@@ -16,7 +16,7 @@ class Logic {
     }
 
     func update(deltaTime dt: Float) {
-        Logic.stateManager.update()
+        Logic.stateManager.update(deltaTime: dt)
     }
 
     func render() {

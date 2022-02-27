@@ -2,10 +2,18 @@ import Raylib
 import Seuwichi
 
 struct IdleState: State {
-    func update() {
+    func update(deltaTime dt: Float) {
         Logic.player.update(deltaTime: Engine.deltaTime)
 
         if Logic.player.velocity.x == 1 || Logic.player.velocity.x == -1 {
+            Logic.player.animation = Logic.player.running
+            Logic.stateManager.changeState(id: "move")
+        } else {
+            Logic.player.animation = Logic.player.idle
+        }
+
+        if Logic.player.velocity.y == 1 || Logic.player.velocity.y == -1 {
+            Logic.player.animation = Logic.player.running
             Logic.stateManager.changeState(id: "move")
         }
     }
