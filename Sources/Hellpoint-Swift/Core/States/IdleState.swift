@@ -23,7 +23,7 @@ struct IdleState: State {
     }
 
     func onEnter() {
-        print("Entered IdleState")
+        print("Entered Idle State")
     }
 
     func onExit() {

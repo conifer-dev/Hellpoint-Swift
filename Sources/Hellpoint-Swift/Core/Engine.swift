@@ -8,7 +8,7 @@ class Engine {
 	let logic = Logic()
 
 	// Window defines
-	let windowDimDefines: [String: Int32] = ["screenWidth": 1280, "screenHeight": 768]
+	static let windowDimDefines: [String: Int32] = ["screenWidth": 1280, "screenHeight": 768]
 	let windowTitle: String = "Hellpoint Swift"
 	let targetFPS: Int32 = 60
 
@@ -17,7 +17,7 @@ class Engine {
 
 	// Engine run startpoint
 	func run() {
-		Raylib.initWindow(windowDimDefines["screenWidth"]!, windowDimDefines["screenHeight"]!, windowTitle)
+		Raylib.initWindow(Engine.windowDimDefines["screenWidth"]!, Engine.windowDimDefines["screenHeight"]!, windowTitle)
 		Raylib.setTargetFPS(targetFPS)
 		logic.initStates()
 
