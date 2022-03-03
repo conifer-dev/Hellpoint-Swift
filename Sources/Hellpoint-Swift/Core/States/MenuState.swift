@@ -10,11 +10,8 @@ class MenuState: State {
 // ======================================================================================================== 
 
     func update(deltaTime dt: Float) {
-        playButton.checkCollision()
-        
-        if playButton.isButtonPressed {
-            playButton.onPressCountdown(with: &transitionTimer, deltaTime: dt)
-        }
+        playButton.onCollisionCheck()
+        playButton.onPressCountdown(with: &transitionTimer, subtractedBy: dt)
     }
 
     func render() {

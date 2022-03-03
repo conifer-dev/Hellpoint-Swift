@@ -31,9 +31,10 @@ class PlayButton: UIButton {
     }
 
     func render() {
-        if self.buttonState == .released {
+        switch self.buttonState {
+        case .released:
             Raylib.drawTexture(self.buttonTexture, Int32(self.buttonPosition.x), Int32(self.buttonPosition.y), .white)
-        } else {
+        case .pressed:
             Raylib.drawTexture(self.onPressButtonTexture!, Int32(self.buttonPosition.x), Int32(self.buttonPosition.y), .white)
         }
     }
@@ -43,7 +44,7 @@ class PlayButton: UIButton {
         Logic.hasGameStarted = true
     }
 
-    func checkCollision() {
+    func onCollisionCheck() {
         let mousePoint = Raylib.getMousePosition()
 
         if Raylib.checkCollisionPointRec(mousePoint, self.buttonBounds) {
@@ -59,13 +60,17 @@ class PlayButton: UIButton {
 // ======================================================================================================== 
 
 extension PlayButton {
-    func onPressCountdown(with timeInterval: inout Float, deltaTime dt: Float) {
-        timeInterval -= dt
+    func onPressCountdown(with timeInterval: inout Float, subtractedBy dt: Float) {
+        if self.isButtonPressed {
+            timeInterval -= dt
 
-        if timeInterval <= 0.0 {
-            timeInterval = 0
-            self.isButtonPressed = false
-            self.onPressLogic()
+            if timeInterval <= 0.0 {
+                timeInterval = 0
+                self.isButtonPressed = false
+                self.onPressLogic()
+            }
+        } else {
+            return
         }
-    }    
+    }  
 }

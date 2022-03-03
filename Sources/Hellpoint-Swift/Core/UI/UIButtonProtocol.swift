@@ -23,5 +23,5 @@ protocol UIButton {
 
     func onPressLogic()
     
-    func checkCollision()
+    func onCollisionCheck()
 }
