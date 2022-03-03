@@ -3,7 +3,8 @@ import Aeni
 import Seuwichi
 
 class Logic {
-
+    
+// ======================================================================================================== 
     // Player initialisation
     static var player = Player()
 
@@ -12,6 +13,8 @@ class Logic {
 
     //
     static var hasGameStarted: Bool = false
+
+// ======================================================================================================== 
 
     func initStates() {
         Logic.stateManager.insertState(MenuState(), withID: "menu")
@@ -30,4 +33,5 @@ class Logic {
         }
         Logic.stateManager.render()
     }
+// ======================================================================================================== 
 }

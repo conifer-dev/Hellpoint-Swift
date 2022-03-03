@@ -3,6 +3,8 @@ import Raylib
 protocol UIButton {
 
     associatedtype buttonState
+    
+// ======================================================================================================== 
 
     var buttonTexture: Texture2D { get set }
     var onPressButtonTexture: Texture2D? { get set }
@@ -13,7 +15,13 @@ protocol UIButton {
     var buttonState: buttonState { get set }
     var isButtonPressed: Bool { get set }
 
-    mutating func onPress()
+// ======================================================================================================== 
 
-    mutating func render()
+    func onPress()
+
+    func render()
+
+    func onPressLogic()
+    
+    func checkCollision()
 }

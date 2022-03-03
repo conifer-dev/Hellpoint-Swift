@@ -2,21 +2,19 @@ import Raylib
 import Seuwichi
 
 class MenuState: State {
-    var timer: Float = 0.5
+// ======================================================================================================== 
+
+    var transitionTimer: Float = 0.3
     var playButton = PlayButton(buttonPosition: Vector2(x: 500, y:300))
+
+// ======================================================================================================== 
 
     func update(deltaTime dt: Float) {
         playButton.checkCollision()
+        
         if playButton.isButtonPressed {
-            timer -= dt
+            playButton.onPressCountdown(with: &transitionTimer, deltaTime: dt)
         }
-
-       if timer <= 0.0 {
-            timer = 0
-            playButton.isButtonPressed = false
-           playButton.onPressLogic()
-        }
-        print(timer)
     }
 
     func render() {
@@ -28,6 +26,6 @@ class MenuState: State {
     }
 
     func onExit() {
-        timer = 0.5
+
     }
 }

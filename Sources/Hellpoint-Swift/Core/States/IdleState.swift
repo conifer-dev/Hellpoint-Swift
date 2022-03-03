@@ -2,6 +2,9 @@ import Raylib
 import Seuwichi
 
 struct IdleState: State {
+    
+// ======================================================================================================== 
+
     func update(deltaTime dt: Float) {
         Logic.player.update(deltaTime: Engine.deltaTime)
 

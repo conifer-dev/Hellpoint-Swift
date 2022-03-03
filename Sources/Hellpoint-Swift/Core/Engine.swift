@@ -1,6 +1,9 @@
 import Raylib
 
 class Engine {
+	
+// ======================================================================================================== 
+
 	// Engine singleton --> Outgoing
 	static let game = Engine()
 
@@ -14,6 +17,8 @@ class Engine {
 
 	// deltaTime singleton
 	static var deltaTime: Float = 0
+
+// ======================================================================================================== 
 
 	// Engine run startpoint
 	func run() {

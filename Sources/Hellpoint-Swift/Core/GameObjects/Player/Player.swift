@@ -2,10 +2,14 @@ import Raylib
 import Aeni
 
 struct Player : GameObject {
+// ======================================================================================================== 
+
     var velocity: Vector2 = Vector2(x: 0, y: 0)
     var movementSpeed: Float = 250
     var sprite: Sprite = Sprite(spriteSheet: Resources.manager.loadedResourcesDatabase["playerSpriteSheet"]!, frameDimensions: Vector2(x: 24, y:24), scale: Vector2(x:2, y:2), position: Vector2(x: 50, y: 50))
     var isMoving: Bool = false
+
+// ======================================================================================================== 
 
     // Animations
     lazy var idle: SpriteAnimator = SpriteAnimator(sprite: sprite, origin: Vector2(x: 0, y: 3), rotation: 0, startingFrame: 0, endingFrame: 4, column: 0, duration: 0, animationSpeed: 0.15, repeatable: true, tintColor: .white, debugMode: true)

@@ -4,6 +4,7 @@ import Aeni
 class Resources {
 
     static let manager = Resources()
+// ======================================================================================================== 
 
     //Initialisation of assets & retriving paths
     lazy var rawResourceDatabase: [String: URL?] = ["map": Bundle.module.url(forResource: "map", withExtension: "png"),
@@ -16,6 +17,8 @@ class Resources {
                                                              "playButton": Raylib.loadTexture(self.rawResourceDatabase["playButton"]!!.path),
                                                              "playButtonOnPress": Raylib.loadTexture(self.rawResourceDatabase["playButtonOnPress"]!!.path)]
 
+// ======================================================================================================== 
+    
     deinit{
         for (key, _) in self.loadedResourcesDatabase {
             Raylib.unloadTexture(self.loadedResourcesDatabase[key]!)

@@ -1,5 +1,6 @@
 import Raylib
 import Seuwichi
+import Foundation
 
 class PlayButton: UIButton {
 
@@ -7,26 +8,22 @@ class PlayButton: UIButton {
         case released
         case pressed
     }
+// ======================================================================================================== 
 
     lazy var buttonTexture: Texture2D = Resources.manager.loadedResourcesDatabase["playButton"]!
-
     lazy var onPressButtonTexture: Texture2D? = Resources.manager.loadedResourcesDatabase["playButtonOnPress"]!
-
     lazy var buttonWidth: Int32 = buttonTexture.width
-
     lazy var buttonHeight: Int32 = buttonTexture.height
-
     var buttonPosition: Vector2
-
     lazy var buttonBounds: Rectangle = Rectangle(x: self.buttonPosition.x, y: self.buttonPosition.y, width: Float(self.buttonWidth), height: Float(self.buttonHeight))
-
     var buttonState: buttonState = .released
-
     var isButtonPressed: Bool = false
 
     init(buttonPosition: Vector2) {
         self.buttonPosition = buttonPosition
     }
+
+// ======================================================================================================== 
 
     func onPress() {
         self.buttonState = .pressed
@@ -57,5 +54,18 @@ class PlayButton: UIButton {
             }
         }
     }
+}
 
+// ======================================================================================================== 
+
+extension PlayButton {
+    func onPressCountdown(with timeInterval: inout Float, deltaTime dt: Float) {
+        timeInterval -= dt
+
+        if timeInterval <= 0.0 {
+            timeInterval = 0
+            self.isButtonPressed = false
+            self.onPressLogic()
+        }
+    }    
 }

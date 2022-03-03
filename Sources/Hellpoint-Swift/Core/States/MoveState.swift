@@ -3,6 +3,7 @@ import Seuwichi
 
 struct MoveState: State {
     func update(deltaTime dt: Float) {
+        
         Logic.player.update(deltaTime: Engine.deltaTime)
 
         if Logic.player.velocity.y == 0 && Logic.player.velocity.x == 0 {
