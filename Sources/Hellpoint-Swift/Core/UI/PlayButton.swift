@@ -46,4 +46,16 @@ class PlayButton: UIButton {
         Logic.hasGameStarted = true
     }
 
+    func checkCollision() {
+        let mousePoint = Raylib.getMousePosition()
+
+        if Raylib.checkCollisionPointRec(mousePoint, self.buttonBounds) {
+            if Raylib.isMouseButtonDown(.left) {
+                self.onPress()
+            } else {
+                self.buttonState = .released
+            }
+        }
+    }
+
 }

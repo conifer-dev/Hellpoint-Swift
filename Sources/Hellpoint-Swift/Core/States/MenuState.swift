@@ -6,15 +6,7 @@ class MenuState: State {
     var playButton = PlayButton(buttonPosition: Vector2(x: 500, y:300))
 
     func update(deltaTime dt: Float) {
-        let mousePoint = Raylib.getMousePosition()
-        playButton.buttonState = .released
-
-        if Raylib.checkCollisionPointRec(mousePoint, playButton.buttonBounds) {
-            if Raylib.isMouseButtonDown(.left) {
-                playButton.onPress()
-            }
-        }
-
+        playButton.checkCollision()
         if playButton.isButtonPressed {
             timer -= dt
         }
