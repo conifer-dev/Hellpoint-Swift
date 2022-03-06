@@ -10,8 +10,9 @@ let package = Package(
         .package(url: "https://github.com/conifer-dev/Seuwichi.git", .branch("main"))
     ],
     targets: [
-        .executableTarget(name: "Hellpoint-Swift",
-                          dependencies: ["Raylib", "Aeni", "Seuwichi"],
-                          resources: [.process("Resources")]),
+        .executableTarget(name: "Hellpoint-Swift", dependencies: ["Raylib", "Aeni", "Seuwichi"],
+                resources: [.process("Resources")],
+                swiftSettings: [.unsafeFlags(["-Xfrontend", "-entry-point-function-name", "-Xfrontend", "wWinMain"], .when(platforms: [.windows]))],
+                linkerSettings: [.unsafeFlags(["-Xlinker", "/SUBSYSTEM:WINDOWS"], .when(platforms: [.windows]))])
     ]
 )
