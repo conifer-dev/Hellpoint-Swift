@@ -17,11 +17,11 @@ protocol UIButton {
 
 // ======================================================================================================== 
 
-    func onPress()
+   @inlinable func onPress()
 
-    func render()
+   @inlinable func render()
 
-    func onPressLogic()
+   @inlinable func onPressLogic()
     
-    func onCollisionCheck()
+   @inlinable func onCollisionCheck()
 }

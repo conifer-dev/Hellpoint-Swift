@@ -16,18 +16,18 @@ class Logic {
 
 // ======================================================================================================== 
 
-    func initStates() {
+   @inlinable func initStates() {
         Logic.stateManager.insertState(MenuState(), withID: "menu")
         Logic.stateManager.insertState(IdleState(), withID: "idle")
         Logic.stateManager.insertState(MoveState(), withID: "move")
         Logic.stateManager.changeState(id: "menu")
     }
 
-    func update(deltaTime dt: Float) {
+    @inlinable func update(deltaTime dt: Float) {
         Logic.stateManager.update(deltaTime: dt)
     }
 
-    func render() {
+    @inlinable func render() {
         if Logic.hasGameStarted {
             Raylib.drawTexture(Resources.manager.loadedResourcesDatabase["map"]!, 0, 0, .white)
         }

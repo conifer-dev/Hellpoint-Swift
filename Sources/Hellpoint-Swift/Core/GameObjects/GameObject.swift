@@ -9,7 +9,7 @@ protocol GameObject {
     var sprite: Sprite { get set }
 
 // ======================================================================================================== 
-    mutating func update(deltaTime dt: Float)
+    @inlinable mutating func update(deltaTime dt: Float)
 
-    mutating func render()
+    @inlinable mutating func render()
 }
