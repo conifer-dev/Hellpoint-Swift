@@ -25,6 +25,11 @@ class Logic {
 
     @inlinable func update(deltaTime dt: Float) {
         Logic.stateManager.update(deltaTime: dt)
+
+        if Raylib.isKeyPressed(.letterF) {
+            Logic.stateManager.changeState(id: "menu")
+            Logic.hasGameStarted = false
+        }
     }
 
     @inlinable func render() {

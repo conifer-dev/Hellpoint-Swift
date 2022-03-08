@@ -1,7 +1,7 @@
 import Raylib
 import Seuwichi
 
-struct MoveState: State {
+class MoveState: State {
     func update(deltaTime dt: Float) {
         
         Logic.player.update(deltaTime: Engine.deltaTime)

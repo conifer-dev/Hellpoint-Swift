@@ -4,12 +4,14 @@ import Aeni
 struct Player : GameObject {
 // ======================================================================================================== 
 
+    // Player properties
     var velocity: Vector2 = Vector2(x: 0, y: 0)
-    var movementSpeed: Float = 250
+    var movementSpeed: Float = 300
     var sprite: Sprite = Sprite(spriteSheet: Resources.manager.loadedResourcesDatabase["playerSpriteSheet"]!, frameDimensions: Vector2(x: 24, y:24), scale: Vector2(x:2, y:2), position: Vector2(x: 50, y: 50))
     var isMoving: Bool = false
+    lazy var wep = PlayerWeapon(position: Vector2(x: self.sprite.position.x, y: self.sprite.position.y), scale: Vector2(x: 2, y:2))
 
-// ======================================================================================================== 
+// ========================================================================================================
 
     // Animations
     lazy var idle: SpriteAnimator = SpriteAnimator(sprite: sprite, origin: Vector2(x: 0, y: 3), rotation: 0, startingFrame: 0, endingFrame: 4, column: 0, duration: 0, animationSpeed: 0.15, repeatable: true, tintColor: .white, debugMode: true)
@@ -20,10 +22,13 @@ struct Player : GameObject {
         animation.update(deltaTime: dt)
         self.playerMovement(deltaTime: dt)
         self.rotatePlayerOnMousePos()
+        //self.riflePosition.x = self.sprite.position.x + 25
+        //self.riflePosition.y = self.sprite.position.y + 30
     }
 
     mutating func render() {
         self.animation.render()
+        self.wep.render()
     }
 
     mutating func playerMovement(deltaTime dt: Float) {

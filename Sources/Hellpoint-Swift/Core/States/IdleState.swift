@@ -1,7 +1,7 @@
 import Raylib
 import Seuwichi
 
-struct IdleState: State {
+class IdleState: State {
     
 // ======================================================================================================== 
 

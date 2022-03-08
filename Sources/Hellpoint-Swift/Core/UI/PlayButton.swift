@@ -3,7 +3,6 @@ import Seuwichi
 import Foundation
 
 class PlayButton: UIButton {
-
     enum buttonState {
         case released
         case pressed
@@ -14,8 +13,8 @@ class PlayButton: UIButton {
     lazy var onPressButtonTexture: Texture2D? = Resources.manager.loadedResourcesDatabase["playButtonOnPress"]!
     lazy var buttonWidth: Int32 = buttonTexture.width
     lazy var buttonHeight: Int32 = buttonTexture.height
-    var buttonPosition: Vector2
     lazy var buttonBounds: Rectangle = Rectangle(x: self.buttonPosition.x, y: self.buttonPosition.y, width: Float(self.buttonWidth), height: Float(self.buttonHeight))
+    var buttonPosition: Vector2
     var buttonState: buttonState = .released
     var isButtonPressed: Bool = false
 
