@@ -23,6 +23,7 @@ class Engine {
 	// Engine run startpoint
 	func run() {
 		Raylib.initWindow(Engine.windowDimDefines["screenWidth"]!, Engine.windowDimDefines["screenHeight"]!, windowTitle)
+		Raylib.setConfigFlags(.vsyncHint)
 		Raylib.setTargetFPS(targetFPS)
 		logic.initStates()
 
