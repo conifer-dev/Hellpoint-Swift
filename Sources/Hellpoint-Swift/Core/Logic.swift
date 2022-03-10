@@ -40,12 +40,3 @@ class Logic {
     }
 // ======================================================================================================== 
 }
-
-extension Float {
-    func asDegrees() -> Float {
-        return self * (.pi / 180)
-    }
-    func toRadians() -> Float {
-        return self * (180 / .pi)
-    }
-}

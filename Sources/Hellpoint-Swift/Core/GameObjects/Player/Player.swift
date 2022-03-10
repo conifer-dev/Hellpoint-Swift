@@ -20,8 +20,8 @@ struct Player : GameObject {
 // ========================================================================================================
 
     // Animations.
-    lazy var idle: SpriteAnimator = SpriteAnimator(sprite: sprite, origin: Vector2(x: 0, y: 3), rotation: 0, startingFrame: 0, endingFrame: 4, column: 0, duration: 0, animationSpeed: 0.15, repeatable: true, tintColor: .white, debugMode: true)
-    lazy var running: SpriteAnimator = SpriteAnimator(sprite: sprite, origin: Vector2(x: 0, y: 3), rotation: 0, startingFrame: 0, endingFrame: 6, column: 1, duration: 0, animationSpeed: 0.11, repeatable: true, tintColor: .white, debugMode: true)
+    lazy var idle: SpriteAnimator = SpriteAnimator(sprite: sprite, origin: Vector2(x: 0, y: 3), rotation: 0, startingFrame: 0, endingFrame: 4, column: 0, duration: 0, animationSpeed: 0.15, repeatable: true, tintColor: .white, debugMode: false)
+    lazy var running: SpriteAnimator = SpriteAnimator(sprite: sprite, origin: Vector2(x: 0, y: 3), rotation: 0, startingFrame: 0, endingFrame: 6, column: 1, duration: 0, animationSpeed: 0.11, repeatable: true, tintColor: .white, debugMode: false)
     lazy var animation = self.idle
 
     // Updated player & its assets
@@ -43,7 +43,6 @@ struct Player : GameObject {
         self.isMoving = false
         self.velocity.x = 0
         self.velocity.y = 0
-
 
         if Raylib.isKeyDown(.letterD) {
             self.velocity.x += 1
@@ -120,14 +119,17 @@ struct Player : GameObject {
     }
 
     mutating func keepInScreenBounds() {
-        if self.sprite.position.x < 0 {
+
+        if self.sprite.position.x < 0  {
             self.sprite.position.x = 0
-        } else if self.sprite.position.y < 0 {
+        } else if self.sprite.position.x > Float(Raylib.getScreenWidth()) - self.sprite.frameDimensions.y * self.sprite.scale.y {
+            self.sprite.position.x = 1235
+        }
+
+        if self.sprite.position.y < 0 {
             self.sprite.position.y = 0
         } else if self.sprite.position.y > Float(Raylib.getScreenHeight()) - self.sprite.frameDimensions.y * self.sprite.scale.y {
             self.sprite.position.y = 720
-        } else if self.sprite.position.x > Float(Raylib.getScreenWidth()) - self.sprite.frameDimensions.y * self.sprite.scale.y{
-            self.sprite.position.x = 1235
         }
     }
 
