@@ -11,13 +11,15 @@ class Resources {
                                                     "playerSprite": Bundle.module.url(forResource: "PlayerSheet", withExtension: "png"),
                                                     "playButton": Bundle.module.url(forResource:"playButton", withExtension: "png"),
                                                     "playButtonOnPress": Bundle.module.url(forResource:"playButtonOnPress", withExtension: "png"),
-                                                    "rifle": Bundle.module.url(forResource:"rifle", withExtension: "png")]
+                                                    "rifle": Bundle.module.url(forResource:"rifle", withExtension: "png"),
+                                                    "bullet": Bundle.module.url(forResource:"bullet", withExtension: "png")]
     // Loading textures
     lazy var loadedResourcesDatabase: [String: Texture2D] = ["playerSpriteSheet": Raylib.loadTexture(self.rawResourceDatabase["playerSprite"]!!.path),
                                                              "map": Raylib.loadTexture(self.rawResourceDatabase["map"]!!.path),
                                                              "playButton": Raylib.loadTexture(self.rawResourceDatabase["playButton"]!!.path),
                                                              "playButtonOnPress": Raylib.loadTexture(self.rawResourceDatabase["playButtonOnPress"]!!.path),
-                                                             "rifle": Raylib.loadTexture(self.rawResourceDatabase["rifle"]!!.path)]
+                                                             "rifle": Raylib.loadTexture(self.rawResourceDatabase["rifle"]!!.path),
+                                                             "bullet": Raylib.loadTexture(self.rawResourceDatabase["bullet"]!!.path)]
 
 // ======================================================================================================== 
     

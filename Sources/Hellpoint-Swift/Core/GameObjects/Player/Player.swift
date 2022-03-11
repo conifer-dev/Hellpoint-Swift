@@ -13,9 +13,12 @@ struct Player : GameObject {
 
     //Player Weapon
     lazy var weaponTexture: Texture2D = Resources.manager.loadedResourcesDatabase["rifle"]!
+    lazy var destRect = Rectangle()
+    lazy var sourceRect = Rectangle()
     var weaponScale: Float = 1.5
     var aimVector: Vector2 = Vector2()
     var aimAngle: Float = 0
+    var bullets = Bullets()
 
 // ========================================================================================================
 
@@ -30,12 +33,24 @@ struct Player : GameObject {
         self.playerMovement(deltaTime: dt)
         self.rotatePlayerOnMousePos()
         self.rotateWeaponOnMousePos()
+        self.bullets.update(deltaTime: dt)
+        self.bullets.position.x = self.destRect.x
+        self.bullets.position.y = self.destRect.y
+        self.updateWeapon()
+
+        if Raylib.isMouseButtonPressed(.left) {
+            bullets.spawnBullets(dt: dt)
+            print("Bullet Fired!")
+        }
     }
 
     // Rendering of player & its assets.
     mutating func render() {
         self.renderWeapon()
         self.animation.render()
+        for var bullet in bullets.projectiles {
+            bullet.render()
+        }
     }
 
     // Player movement.
@@ -103,8 +118,8 @@ struct Player : GameObject {
     // Rendering the weapon
     mutating func renderWeapon() {
         let mousePosX = Raylib.getMouseX() // Getting mouse position X
-        var sourceRect = Rectangle(x: 0, y: 0, width: Float(self.weaponTexture.width), height: Float(self.weaponTexture.height))
-        var destRect = Rectangle(x: self.sprite.position.x + 25, y: self.sprite.position.y + 25, width: Float(self.weaponTexture.width) * self.weaponScale, height: Float(self.weaponTexture.height) * self.weaponScale)
+        //var sourceRect = Rectangle(x: 0, y: 0, width: Float(self.weaponTexture.width), height: Float(self.weaponTexture.height))
+        //var destRect = Rectangle(x: self.sprite.position.x + 25, y: self.sprite.position.y + 25, width: Float(self.weaponTexture.width) * self.weaponScale, height: Float(self.weaponTexture.height) * self.weaponScale)
 
         // Just like rotatePlayerOnMousePos, but simply rotate the weapon
         if Float(mousePosX) > self.sprite.position.x {
@@ -131,6 +146,11 @@ struct Player : GameObject {
         } else if self.sprite.position.y > Float(Raylib.getScreenHeight()) - self.sprite.frameDimensions.y * self.sprite.scale.y {
             self.sprite.position.y = 720
         }
+    }
+
+    mutating func updateWeapon() {
+        destRect = Rectangle(x: self.sprite.position.x + 25, y: self.sprite.position.y + 25, width: Float(self.weaponTexture.width) * self.weaponScale, height: Float(self.weaponTexture.height) * self.weaponScale)
+        sourceRect = Rectangle(x: 0, y: 0, width: Float(self.weaponTexture.width), height: Float(self.weaponTexture.height))
     }
 
 }
