@@ -13,12 +13,14 @@ struct Player : GameObject {
 
     //Player Weapon
     lazy var weaponTexture: Texture2D = Resources.manager.loadedResourcesDatabase["rifle"]!
-    lazy var destRect = Rectangle()
-    lazy var sourceRect = Rectangle()
+    lazy var weaponDestRect = Rectangle()
+    lazy var weaponSourceRect = Rectangle()
     var weaponScale: Float = 1.5
     var aimVector: Vector2 = Vector2()
     var aimAngle: Float = 0
-    var bullets = Bullets()
+
+    // Bullets
+    var projectileArray = [Projectile]()
 
 // ========================================================================================================
 
@@ -27,20 +29,21 @@ struct Player : GameObject {
     lazy var running: SpriteAnimator = SpriteAnimator(sprite: sprite, origin: Vector2(x: 0, y: 3), rotation: 0, startingFrame: 0, endingFrame: 6, column: 1, duration: 0, animationSpeed: 0.11, repeatable: true, tintColor: .white, debugMode: false)
     lazy var animation = self.idle
 
+// ========================================================================================================
     // Updated player & its assets
     mutating func update(deltaTime dt: Float) {
         self.animation.update(deltaTime: dt)
         self.playerMovement(deltaTime: dt)
         self.rotatePlayerOnMousePos()
         self.rotateWeaponOnMousePos()
-        self.bullets.update(deltaTime: dt)
-        self.bullets.position.x = self.destRect.x
-        self.bullets.position.y = self.destRect.y
         self.updateWeapon()
 
         if Raylib.isMouseButtonPressed(.left) {
-            bullets.spawnBullets(dt: dt)
-            print("Bullet Fired!")
+            projectileArray.append(Projectile(position: self.sprite.position, velocity: aimVector))
+        }
+
+        for bullet in projectileArray.indices {
+            projectileArray[bullet].update(deltaTime: dt)
         }
     }
 
@@ -48,8 +51,9 @@ struct Player : GameObject {
     mutating func render() {
         self.renderWeapon()
         self.animation.render()
-        for var bullet in bullets.projectiles {
-            bullet.render()
+
+        for bullet in projectileArray.indices {
+            projectileArray[bullet].render()
         }
     }
 
@@ -123,14 +127,14 @@ struct Player : GameObject {
 
         // Just like rotatePlayerOnMousePos, but simply rotate the weapon
         if Float(mousePosX) > self.sprite.position.x {
-            sourceRect.height *= 1
+            weaponSourceRect.height *= 1
         } else {
-            sourceRect.height *= -1
-            destRect.y += 7 // Have to add arbitrary numbers to destRect to ensure the flipped weapon texture is in the same position as the right handside upon flipping (which it didn't or won't without those values)
-            destRect.x -= 2 // These numbers are using to ensure the flipped weapon is in the same position as the non-flipped one
+            weaponSourceRect.height *= -1
+            weaponDestRect.y += 7 // Have to add arbitrary numbers to destRect to ensure the flipped weapon texture is in the same position as the right handside upon flipping (which it didn't or won't without those values)
+            weaponDestRect.x -= 2 // These numbers are using to ensure the flipped weapon is in the same position as the non-flipped one
         }
 
-        Raylib.drawTexturePro(self.weaponTexture, sourceRect, destRect, Vector2(x: 0, y: 3), self.aimAngle, .white)
+        Raylib.drawTexturePro(self.weaponTexture, weaponSourceRect, weaponDestRect, Vector2(x: 0, y: 3), self.aimAngle, .white)
     }
 
     mutating func keepInScreenBounds() {
@@ -149,8 +153,8 @@ struct Player : GameObject {
     }
 
     mutating func updateWeapon() {
-        destRect = Rectangle(x: self.sprite.position.x + 25, y: self.sprite.position.y + 25, width: Float(self.weaponTexture.width) * self.weaponScale, height: Float(self.weaponTexture.height) * self.weaponScale)
-        sourceRect = Rectangle(x: 0, y: 0, width: Float(self.weaponTexture.width), height: Float(self.weaponTexture.height))
+        weaponDestRect = Rectangle(x: self.sprite.position.x + 25, y: self.sprite.position.y + 25, width: Float(self.weaponTexture.width) * self.weaponScale, height: Float(self.weaponTexture.height) * self.weaponScale)
+        weaponSourceRect = Rectangle(x: 0, y: 0, width: Float(self.weaponTexture.width), height: Float(self.weaponTexture.height))
     }
 
 }
