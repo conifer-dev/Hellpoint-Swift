@@ -24,8 +24,8 @@ struct Projectile {
     }
 
     mutating func render() {
-        var rect = Rectangle(x: position.x, y: position.y, width:15, height: 5)
-        Raylib.drawRectangle(Int32(rect.x), Int32(rect.y), Int32(rect.width), Int32(rect.height), .white)
+        let rect = Rectangle(x: position.x, y: position.y, width:15, height: 5)
+        Raylib.drawTexture(texture, Int32(position.x), Int32(position.y), .white)
     }
 
 }
